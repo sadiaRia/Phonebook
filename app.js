@@ -20,18 +20,14 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', routes);
-// app.use('/users', usersRouter);
-
-// function _intializeModels(){
+//DB Connection
   mongoose.connect(config.db, { useNewUrlParser: true });
   mongoose.connection.on('error', (err) => {
     console.log('error', err);
     if (err) { process.exit(1); }
   });
-// }
-// _intializeModels();
-// catch 404 and forward to error handler
-app.use(function(req, res, next) {
+
+  app.use(function(req, res, next) {
   next(createError(404));
 });
 
